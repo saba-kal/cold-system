@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4hrljdnhr3dv"]
+
+[ext_resource type="Script" path="res://Scripts/RtsCamera.cs" id="1_58e7l"]
+
+[node name="RTSCamera" type="Node3D"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+script = ExtResource("1_58e7l")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 15)
+
+[node name="Camera3D" type="Camera3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+fov = 40.0

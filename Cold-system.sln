@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cold-system", "Cold-system.csproj", "{EEC034E4-8716-47DB-9A6F-46E03418922F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEC034E4-8716-47DB-9A6F-46E03418922F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC034E4-8716-47DB-9A6F-46E03418922F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC034E4-8716-47DB-9A6F-46E03418922F}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{EEC034E4-8716-47DB-9A6F-46E03418922F}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{EEC034E4-8716-47DB-9A6F-46E03418922F}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{EEC034E4-8716-47DB-9A6F-46E03418922F}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal
