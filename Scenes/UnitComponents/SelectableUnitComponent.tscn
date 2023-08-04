@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2pqfvw4icaii"]
+
+[ext_resource type="Script" path="res://Scripts/UnitComponents/SelectableUnitComponent.cs" id="1_5ypwo"]
+[ext_resource type="Shader" path="res://Shaders/circle.gdshader" id="2_s564w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aobu7"]
+render_priority = 0
+shader = ExtResource("2_s564w")
+shader_parameter/scale = 1.0
+shader_parameter/outline_width = 0.04
+shader_parameter/color = Color(0.141176, 1, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_xkeqy"]
+material = SubResource("ShaderMaterial_aobu7")
+size = Vector2(3, 3)
+
+[node name="SelectableUnitComponent" type="Node3D" node_paths=PackedStringArray("_selectedIndicator")]
+script = ExtResource("1_5ypwo")
+_selectedIndicator = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.117984, 0)
+mesh = SubResource("QuadMesh_xkeqy")

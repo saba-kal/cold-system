@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjppnsbvyd3mf"]
+
+[ext_resource type="Script" path="res://Scripts/Units/Unit.cs" id="1_klk5r"]
+[ext_resource type="PackedScene" uid="uid://f55rjcs431ol" path="res://Models/Units/Mech.glb" id="1_tywy2"]
+[ext_resource type="PackedScene" uid="uid://bi2shdljkpd3x" path="res://Scenes/UnitComponents/UnitMoveComponent.tscn" id="2_1vy74"]
+[ext_resource type="PackedScene" uid="uid://c2pqfvw4icaii" path="res://Scenes/UnitComponents/SelectableUnitComponent.tscn" id="3_gbdtp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xgm33"]
+radius = 0.8
+height = 3.0
+
+[node name="RocketMech" type="CharacterBody3D" node_paths=PackedStringArray("_moveComponent", "_selectableComponent")]
+collision_layer = 2
+script = ExtResource("1_klk5r")
+_moveComponent = NodePath("UnitMoveComponent")
+_selectableComponent = NodePath("SelectableUnitComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_xgm33")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="Mech" parent="Visuals" instance=ExtResource("1_tywy2")]
+
+[node name="Skeleton3D" parent="Visuals/Mech/Armature" index="0"]
+bones/2/position = Vector3(0, 1.48, 0)
+bones/3/rotation = Quaternion(-2.82579e-08, -0.28873, 0.957411, 1.74977e-08)
+bones/3/scale = Vector3(1, 1, 0.999988)
+bones/4/rotation = Quaternion(-0.267209, -1.45505e-07, -5.16148e-14, 0.963639)
+bones/5/rotation = Quaternion(-4.41931e-08, -0.782321, -0.622876, 1.03207e-07)
+bones/6/rotation = Quaternion(2.25469e-10, -0.49875, -0.866746, 2.118e-09)
+bones/6/scale = Vector3(1, 1, 0.999986)
+bones/7/rotation = Quaternion(-0.228747, 1.46992e-07, 2.91958e-14, 0.973486)
+bones/8/rotation = Quaternion(-6.06438e-08, 0.785819, 0.618457, 1.34818e-07)
+bones/15/position = Vector3(0.54, 0.552464, -1.1101)
+bones/15/rotation = Quaternion(0.994063, 8.12303e-17, 5.02031e-17, 0.108802)
+bones/17/position = Vector3(-0.54, 0.459671, 1.04612)
+bones/17/rotation = Quaternion(0.57504, -7.43483e-17, -4.59498e-17, 0.818125)
+
+[node name="Cabin_2" parent="Visuals/Mech/Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8382, -0.0265455)
+bone_idx = 10
+
+[node name="UnitMoveComponent" parent="." node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("2_1vy74")]
+debug_enabled = true
+_animationPlayer = NodePath("../Visuals/Mech/AnimationPlayer")
+
+[node name="SelectableUnitComponent" parent="." instance=ExtResource("3_gbdtp")]
+
+[editable path="Visuals/Mech"]

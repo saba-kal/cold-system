@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi2shdljkpd3x"]
+
+[ext_resource type="Script" path="res://Scripts/UnitComponents/UnitMoveComponent.cs" id="1_67grs"]
+
+[node name="UnitMoveComponent" type="NavigationAgent3D"]
+avoidance_enabled = true
+radius = 1.0
+script = ExtResource("1_67grs")
