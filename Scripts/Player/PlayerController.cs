@@ -4,8 +4,6 @@ using System.Linq;
 
 public partial class PlayerController : Node3D
 {
-    [Export(PropertyHint.Layers3DPhysics)] private uint _groundCollisionLayer;
-
     private List<Unit> _units = new List<Unit>();
     private bool _mouseIsPressed = false;
     private Camera3D _camera;
@@ -48,7 +46,7 @@ public partial class PlayerController : Node3D
         var mousePosition = GetViewport().GetMousePosition();
         var from = _camera.ProjectRayOrigin(mousePosition);
         var to = from + _camera.ProjectRayNormal(mousePosition) * 1000;
-        var query = PhysicsRayQueryParameters3D.Create(from, to, _groundCollisionLayer);
+        var query = PhysicsRayQueryParameters3D.Create(from, to, Constants.GROUND_COLLISION_LAYER);
         var result = worldSpace.IntersectRay(query);
         if (result?.Count > 0)
         {

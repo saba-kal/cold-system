@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkbj3lnha4wt0"]
+
+[ext_resource type="Script" path="res://Scripts/UnitComponents/LineOfSightComponent.cs" id="1_ksi5g"]
+
+[node name="LineOfSightComponent" type="Node3D" node_paths=PackedStringArray("_startPositions")]
+script = ExtResource("1_ksi5g")
+_startPositions = []
