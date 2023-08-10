@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0db63dcwnk43"]
+
+[ext_resource type="Script" path="res://Scripts/Player/PauseController.cs" id="1_lqwgc"]
+
+[node name="PauseController" type="Node3D"]
+process_mode = 3
+script = ExtResource("1_lqwgc")

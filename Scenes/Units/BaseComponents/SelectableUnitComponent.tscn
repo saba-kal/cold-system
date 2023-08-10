@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c2pqfvw4icaii"]
 
-[ext_resource type="Script" path="res://Scripts/UnitComponents/SelectableUnitComponent.cs" id="1_5ypwo"]
+[ext_resource type="Script" path="res://Scripts/Units/BaseComponents/SelectableUnitComponent.cs" id="1_5ypwo"]
 [ext_resource type="Shader" path="res://Shaders/circle.gdshader" id="2_s564w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aobu7"]

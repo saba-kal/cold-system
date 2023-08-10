@@ -4,4 +4,8 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>Coldsystem</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Scripts\Weapons\**" />
+    <EmbeddedResource Remove="Scripts\Weapons\**" />
+  </ItemGroup>
 </Project>

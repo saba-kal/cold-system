@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,7 +10,7 @@ public partial class TurretAimComponent : Node3D
     [Export] private float _range = 10f;
     [Export(PropertyHint.Enum, Constants.UNIT_GROUPS)] private string _aimTarget;
     [Export] private Node3D _turretNode;
-    [Export] private Node3D _gunNode;
+    [Export] private Array<Node3D> _gunNodes;
 
     private LineOfSightComponent _lineOfSightComponent;
 
@@ -38,22 +39,22 @@ public partial class TurretAimComponent : Node3D
         TargetIsInSight = true;
     }
 
-    private List<Node3D> GetTargetUnits()
+    private List<Unit> GetTargetUnits()
     {
-        return GetTree().GetNodesInGroup(_aimTarget).Cast<Node3D>().ToList();
+        return GetTree().GetNodesInGroup(_aimTarget).Cast<Unit>().ToList();
     }
 
-    private Node3D GetClosestTarget(List<Node3D> potentialTargets)
+    private Unit GetClosestTarget(List<Unit> potentialTargets)
     {
-        Node3D closestTarget = null;
+        Unit closestTarget = null;
         var minDistanceSqr = float.MaxValue;
         var rangeSqr = _range * _range;
         foreach (var target in potentialTargets)
         {
-            var distanceSqr = target.GlobalPosition.DistanceSquaredTo(GlobalPosition);
+            var distanceSqr = target.GetUnitGlobalCenter().DistanceSquaredTo(GlobalPosition);
             if (distanceSqr < minDistanceSqr &&
                 distanceSqr < rangeSqr &&
-                LineOfSightIsFree(target.GlobalPosition))
+                LineOfSightIsFree(target.GetUnitGlobalCenter()))
             {
                 closestTarget = target;
                 minDistanceSqr = distanceSqr;
@@ -73,11 +74,14 @@ public partial class TurretAimComponent : Node3D
         return _lineOfSightComponent.LineOfSightIsFree(targetPosition);
     }
 
-    private void AimAtTarget(Node3D target)
+    private void AimAtTarget(Unit target)
     {
-        _turretNode.LookAt(target.GlobalPosition, Vector3.Up, true);
+        _turretNode.LookAt(target.GetUnitGlobalCenter(), Vector3.Up, true);
         _turretNode.Rotation = new Vector3(0, _turretNode.Rotation.Y, 0);
-        _gunNode.LookAt(target.GlobalPosition, Vector3.Up, true);
-        _gunNode.Rotation = new Vector3(_gunNode.Rotation.X, 0, 0);
+        foreach (var gunNode in _gunNodes)
+        {
+            gunNode.LookAt(target.GetUnitGlobalCenter(), Vector3.Up, true);
+            gunNode.Rotation = new Vector3(gunNode.Rotation.X, 0, 0);
+        }
     }
 }

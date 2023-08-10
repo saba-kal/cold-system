@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dk3ylp4pvnlcn"]
+
+[ext_resource type="Script" path="res://Scripts/Units/Weapons/AutoGun.cs" id="1_rykv8"]
+[ext_resource type="PackedScene" uid="uid://dptykbek4nh1s" path="res://Scenes/Projectiles/Projectile.tscn" id="2_58imn"]
+[ext_resource type="AudioStream" uid="uid://4i3dwi7v7ec" path="res://Audio/SFX/autocannon.mp3" id="3_nsdfs"]
+
+[node name="TankCannon" type="Node3D" node_paths=PackedStringArray("_projectileSpawnPoint")]
+script = ExtResource("1_rykv8")
+_fireRate = 0.3
+_projectileDamage = 10.0
+_projectileScene = ExtResource("2_58imn")
+_projectileSpawnPoint = NodePath("Marker3D")
+_targetGroup = "PlayerUnit"
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_nsdfs")
+pitch_scale = 1.27

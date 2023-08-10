@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw8h5q3xotbk7"]
+
+[ext_resource type="Script" path="res://Scripts/Units/Weapons/AutoGun.cs" id="1_h3h82"]
+[ext_resource type="PackedScene" uid="uid://dptykbek4nh1s" path="res://Scenes/Projectiles/Projectile.tscn" id="2_0qbsy"]
+[ext_resource type="PackedScene" uid="uid://dldr1qklku3o" path="res://Models/Weapons/Weapons.glb" id="3_0go7t"]
+[ext_resource type="AudioStream" uid="uid://4i3dwi7v7ec" path="res://Audio/SFX/autocannon.mp3" id="4_oopbw"]
+
+[node name="MechAutoCannon" type="Node3D" node_paths=PackedStringArray("_projectileSpawnPoint")]
+script = ExtResource("1_h3h82")
+_fireRate = 0.5
+_projectileDamage = 10.0
+_projectileScene = ExtResource("2_0qbsy")
+_projectileSpawnPoint = NodePath("Marker3D")
+
+[node name="Weapons" parent="." instance=ExtResource("3_0go7t")]
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130986, 0, 0.960763)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_oopbw")

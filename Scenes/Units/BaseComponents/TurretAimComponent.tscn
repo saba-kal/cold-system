@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://stj274oo08nb"]
 
-[ext_resource type="Script" path="res://Scripts/UnitComponents/TurretAimComponent.cs" id="1_t4gpr"]
+[ext_resource type="Script" path="res://Scripts/Units/BaseComponents/TurretAimComponent.cs" id="1_t4gpr"]
 
 [node name="TurretAimComponent" type="Node3D" node_paths=PackedStringArray("_turretNode", "_gunNode")]
 script = ExtResource("1_t4gpr")

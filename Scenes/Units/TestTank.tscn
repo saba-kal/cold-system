@@ -1,17 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtuqgvatfcbk2"]
+[gd_scene load_steps=9 format=3 uid="uid://dtuqgvatfcbk2"]
 
 [ext_resource type="Script" path="res://Scripts/Units/Unit.cs" id="1_13xkx"]
 [ext_resource type="PackedScene" uid="uid://d21glkb30hlci" path="res://Models/Units/StylizedTank.blend" id="1_skvag"]
-[ext_resource type="PackedScene" uid="uid://bi2shdljkpd3x" path="res://Scenes/UnitComponents/UnitMoveComponent.tscn" id="3_sxee0"]
-[ext_resource type="PackedScene" uid="uid://stj274oo08nb" path="res://Scenes/UnitComponents/TurretAimComponent.tscn" id="4_mxbfs"]
-[ext_resource type="PackedScene" uid="uid://bkbj3lnha4wt0" path="res://Scenes/UnitComponents/LineOfSightComponent.tscn" id="5_40gs1"]
+[ext_resource type="PackedScene" uid="uid://bi2shdljkpd3x" path="res://Scenes/Units/BaseComponents/UnitMoveComponent.tscn" id="3_bvr76"]
+[ext_resource type="PackedScene" uid="uid://dk3ylp4pvnlcn" path="res://Scenes/Units/Weapons/TankCannon.tscn" id="3_c70gb"]
+[ext_resource type="PackedScene" uid="uid://stj274oo08nb" path="res://Scenes/Units/BaseComponents/TurretAimComponent.tscn" id="4_l5cp7"]
+[ext_resource type="PackedScene" uid="uid://bkbj3lnha4wt0" path="res://Scenes/Units/BaseComponents/LineOfSightComponent.tscn" id="5_ltayd"]
+[ext_resource type="PackedScene" uid="uid://c7kftsmwmfaa" path="res://Scenes/Units/Weapons/WeaponManager.tscn" id="7_s1v6m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_stb2b"]
 size = Vector3(1.1543, 0.577759, 1.99126)
 
-[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("_moveComponent") groups=["EnemyUnit"]]
+[node name="TestTank" type="CharacterBody3D" groups=["EnemyUnit"]]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_13xkx")
-_moveComponent = NodePath("UnitMoveComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.303965, 0)
@@ -22,15 +25,22 @@ shape = SubResource("BoxShape3D_stb2b")
 [node name="StylizedTank" parent="Visuals" instance=ExtResource("1_skvag")]
 
 [node name="Marker3D" type="Marker3D" parent="Visuals/StylizedTank/TankBody/TankBody_001/TankBody_002" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.774654, 4.65316)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0275531, 3.58998)
 
-[node name="UnitMoveComponent" parent="." instance=ExtResource("3_sxee0")]
+[node name="TankCannon" parent="Visuals/StylizedTank/TankBody/TankBody_001/TankBody_002/Marker3D" instance=ExtResource("3_c70gb")]
 
-[node name="TurretAimComponent" parent="." node_paths=PackedStringArray("_turretNode", "_gunNode") instance=ExtResource("4_mxbfs")]
+[node name="UnitMoveComponent" parent="." instance=ExtResource("3_bvr76")]
+
+[node name="TurretAimComponent" parent="." node_paths=PackedStringArray("_turretNode", "_gunNodes") instance=ExtResource("4_l5cp7")]
 _turretNode = NodePath("../Visuals/StylizedTank/TankBody/TankBody_001")
-_gunNode = NodePath("../Visuals/StylizedTank/TankBody/TankBody_001/TankBody_002")
+_gunNodes = [NodePath("../Visuals/StylizedTank/TankBody/TankBody_001/TankBody_002")]
 
-[node name="LineOfSightComponent" parent="." node_paths=PackedStringArray("_startPositions") instance=ExtResource("5_40gs1")]
+[node name="LineOfSightComponent" parent="." node_paths=PackedStringArray("_startPositions") instance=ExtResource("5_ltayd")]
 _startPositions = [NodePath("../Visuals/StylizedTank/TankBody/TankBody_001/TankBody_002/Marker3D")]
+
+[node name="WeaponManager" parent="." instance=ExtResource("7_s1v6m")]
+
+[node name="UnitCenter" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41831, 0)
 
 [editable path="Visuals/StylizedTank"]
