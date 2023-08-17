@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3mhm5qrbeq7a"]
+
+[ext_resource type="PackedScene" uid="uid://cjppnsbvyd3mf" path="res://Scenes/Units/RocketMech.tscn" id="1_d8uri"]
+[ext_resource type="PackedScene" uid="uid://rtxyrch40cb4" path="res://Scenes/Menu/MainMenu.tscn" id="2_3hhst"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x0xic"]
+
+[sub_resource type="Sky" id="Sky_ywgst"]
+sky_material = SubResource("ProceduralSkyMaterial_x0xic")
+
+[sub_resource type="Environment" id="Environment_ijcjf"]
+background_mode = 2
+background_color = Color(0.796078, 0.870588, 0.87451, 1)
+sky = SubResource("Sky_ywgst")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qndne"]
+
+[sub_resource type="Sky" id="Sky_wtarp"]
+sky_material = SubResource("ProceduralSkyMaterial_qndne")
+
+[sub_resource type="Environment" id="Environment_7d745"]
+background_mode = 2
+sky = SubResource("Sky_wtarp")
+
+[node name="MenuBackdrop" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer"]
+environment = SubResource("Environment_ijcjf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer"]
+transform = Transform3D(0.810778, 0.15884, 0.563391, -0.585354, 0.22001, 0.780357, 0, -0.962479, 0.271356, -0.0118705, 7.20901, 4.67766)
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer"]
+transform = Transform3D(0.491744, 0.110621, -0.863684, 0.0582445, 0.985497, 0.159385, 0.868789, -0.128681, 0.47817, -1.80985, 3.27372, 5.71325)
+environment = SubResource("Environment_7d745")
+fov = 87.1875
+
+[node name="RocketMech" parent="CanvasLayer" instance=ExtResource("1_d8uri")]
+
+[node name="Main Menu" parent="." instance=ExtResource("2_3hhst")]

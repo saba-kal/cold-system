@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=3 uid="uid://rtxyrch40cb4"]
+
+[ext_resource type="Theme" uid="uid://ddjlogvwci4rn" path="res://UI/Cold System UI Theme.tres" id="1_kmpau"]
+[ext_resource type="Script" path="res://Scenes/Menu/MainMenu.gd" id="2_ioldb"]
+[ext_resource type="Texture2D" uid="uid://bwwc1pmdb5jeg" path="res://UI/CS_LogoPlaceholder.png" id="3_kro6j"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_kmpau")
+script = ExtResource("2_ioldb")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -380.0
+offset_right = 380.0
+offset_bottom = 271.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 25
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("3_kro6j")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.5
+offset_top = -75.5
+offset_right = 136.5
+offset_bottom = 75.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_bottom = 25
+
+[node name="Play" type="Button" parent="VBoxContainer2/MarginContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 25
+
+[node name="Settings" type="Button" parent="VBoxContainer2/MarginContainer2"]
+layout_mode = 2
+text = "Settings"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -199.0
+offset_top = -90.0
+offset_right = -87.0
+offset_bottom = -59.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = -150
+
+[node name="Exit" type="Button" parent="VBoxContainer3/HBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer2/MarginContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer2/MarginContainer2/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer3/HBoxContainer/MarginContainer/Exit" to="." method="_on_exit_pressed"]
