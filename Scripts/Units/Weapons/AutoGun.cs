@@ -21,6 +21,7 @@ public partial class AutoGun : BaseWeapon
 
     public override void _Process(double delta)
     {
+        base._Process(delta);
         if (ReadyToFire())
         {
             SpawnProjectile();

@@ -46,21 +46,16 @@ bones/17/rotation = Quaternion(0.994063, -8.12303e-17, -5.02031e-17, 0.108802)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8382, -0.0265455)
 bone_idx = 10
 
-[node name="WeaponContainer_Left" type="Node3D" parent="Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2" index="0"]
+[node name="MechAutoCannon_Left" parent="Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2" index="0" instance=ExtResource("3_5tp5p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.584176, 0.978627, -0.178095)
 
-[node name="MechAutoCannon_Left" parent="Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/WeaponContainer_Left" instance=ExtResource("3_5tp5p")]
-
-[node name="Marker3D2" type="Marker3D" parent="Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/WeaponContainer_Left/MechAutoCannon_Left"]
+[node name="Marker3D2" type="Marker3D" parent="Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/MechAutoCannon_Left"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129317, 0, 0.974287)
 
-[node name="WeaponContainer_Right" type="Node3D" parent="Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.584, 0.979, -0.178)
+[node name="MechAutoCannon_Right" parent="Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2" index="1" instance=ExtResource("3_5tp5p")]
+transform = Transform3D(-1, 0, 0, 0, 1, -8.74228e-08, 0, 8.74228e-08, 1, -0.584, 0.979, -0.178)
 
-[node name="MechAutoCannon_Right" parent="Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/WeaponContainer_Right" instance=ExtResource("3_5tp5p")]
-transform = Transform3D(-1, 0, 0, 0, 1, -8.74228e-08, 0, 8.74228e-08, 1, 0, 0, 0)
-
-[node name="Marker3D2" type="Marker3D" parent="Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/WeaponContainer_Right/MechAutoCannon_Right"]
+[node name="Marker3D2" type="Marker3D" parent="Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/MechAutoCannon_Right"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129317, 0, 0.974287)
 
 [node name="UnitMoveComponent" parent="." node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("3_g811c")]
@@ -72,10 +67,10 @@ _animationPlayer = NodePath("../Visuals/Mech/AnimationPlayer")
 _range = 15.0
 _aimTarget = "EnemyUnit"
 _turretNode = NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2")
-_gunNodes = [NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/WeaponContainer_Left/MechAutoCannon_Left"), NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/WeaponContainer_Right/MechAutoCannon_Right")]
+_gunNodes = [NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/MechAutoCannon_Left"), NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/MechAutoCannon_Right")]
 
 [node name="LineOfSightComponent" parent="." node_paths=PackedStringArray("_startPositions") instance=ExtResource("7_crhd1")]
-_startPositions = [NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/WeaponContainer_Left/MechAutoCannon_Left/Marker3D2"), NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/WeaponContainer_Right/MechAutoCannon_Right/Marker3D2")]
+_startPositions = [NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/MechAutoCannon_Left/Marker3D2"), NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/MechAutoCannon_Right/Marker3D2")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_mexsy")]
 _maxHealth = 200.0
