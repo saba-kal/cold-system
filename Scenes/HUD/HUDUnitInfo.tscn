@@ -1,0 +1,163 @@
+[gd_scene load_steps=10 format=3 uid="uid://bwow07usebckc"]
+
+[ext_resource type="Script" path="res://Scripts/HUD/HUDUnitInfo.cs" id="1_12m0x"]
+[ext_resource type="Texture2D" uid="uid://drq2jt0cvkw0y" path="res://Textures/HUD/temp_profile_picture.png" id="1_ybtqf"]
+[ext_resource type="Texture2D" uid="uid://bvpl1oeafw8ea" path="res://Textures/HUD/temp_hud_mech_status.png" id="2_memqt"]
+[ext_resource type="Texture2D" uid="uid://lkpffmshf38" path="res://Textures/Icons/sword.png" id="3_s47kw"]
+[ext_resource type="Theme" uid="uid://ddjlogvwci4rn" path="res://UI/Cold System UI Theme.tres" id="5_ykavk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klfcv"]
+bg_color = Color(0, 0, 0, 0.352941)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfekr"]
+bg_color = Color(1, 0.34902, 0.215686, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7cdf"]
+bg_color = Color(0, 0.721569, 0.266667, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36ib3"]
+bg_color = Color(0.65098, 0, 0, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[node name="HUDUnitInfo" type="Control" node_paths=PackedStringArray("_healthBar", "_unitNumberLabel")]
+custom_minimum_size = Vector2(170, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 170.0
+offset_bottom = 86.0
+script = ExtResource("1_12m0x")
+_healthBar = NodePath("SystemStatus/HealthBar")
+_unitNumberLabel = NodePath("UnitNumber/Label")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_klfcv")
+
+[node name="PilotPortrait" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -42.5
+offset_right = 86.0
+offset_bottom = 42.5
+grow_vertical = 2
+texture = ExtResource("1_ybtqf")
+expand_mode = 1
+
+[node name="SystemStatus" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 87)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -43.5
+offset_bottom = 43.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TempMechStatus" type="TextureRect" parent="SystemStatus"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -43.5
+offset_right = 35.0
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_memqt")
+expand_mode = 1
+
+[node name="HealthBar" type="ProgressBar" parent="SystemStatus"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = 29.5
+offset_right = 35.5
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_dfekr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_a7cdf")
+value = 50.0
+show_percentage = false
+
+[node name="Icons" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 33.0
+offset_bottom = 35.0
+
+[node name="MechModeIcon" type="TextureRect" parent="Icons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_s47kw")
+expand_mode = 1
+
+[node name="UnitNumber" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -27.0
+offset_right = 26.0
+offset_bottom = -6.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_36ib3")
+
+[node name="Label" type="Label" parent="UnitNumber"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_ykavk")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

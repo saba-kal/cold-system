@@ -2,15 +2,12 @@ using Godot;
 
 public partial class UnitMoveComponent : NavigationAgent3D
 {
-    [Export] private float _moveSpeed = 5;
+    [Export] private float _moveSpeed = 200;
+    [Export] private float _turnSpeed = 10;
     [Export] private AnimationPlayer _animationPlayer;
 
     public override void _Ready()
     {
-        // These values need to be adjusted for the actor's speed and the navigation layout.
-        //PathDesiredDistance = 1;
-        //TargetDesiredDistance = 1;
-
         CallDeferred("ActorSetup");
         VelocityComputed += OnNavigationAgentVelocityComputed;
     }
@@ -23,8 +20,8 @@ public partial class UnitMoveComponent : NavigationAgent3D
             return;
         }
 
-        UpdateVelocity();
-        FaceTowardsVelocity();
+        var direction = UpdateVelocity((float)delta);
+        FaceTowardsVelocity(direction);
         _animationPlayer?.Play("RunForward");
     }
 
@@ -39,24 +36,26 @@ public partial class UnitMoveComponent : NavigationAgent3D
         SetMoveTarget(GetParent<Node3D>().GlobalPosition);
     }
 
-    private void UpdateVelocity()
+    private Vector3 UpdateVelocity(float delta)
     {
         var currentAgentPosition = GetParent<Node3D>().GlobalPosition;
         var nextPathPosition = GetNextPathPosition();
-        Velocity = (nextPathPosition - currentAgentPosition).Normalized() * _moveSpeed;
+        var desiredDirection = (nextPathPosition - currentAgentPosition).Normalized();
+        var currentDirection = Velocity.Normalized();
+        var direction = currentDirection.Lerp(desiredDirection, delta * _turnSpeed).Normalized();
+        Velocity = direction * _moveSpeed * delta;
+        return direction;
     }
 
-    private void FaceTowardsVelocity()
+    private void FaceTowardsVelocity(Vector3 direction)
     {
-        var nextPathPosition = GetNextPathPosition();
         var unitNode = GetParent<Node3D>();
-        var faceDirection = new Vector3(nextPathPosition.X, unitNode.GlobalPosition.Y, nextPathPosition.Z);
-        if (unitNode.GlobalTransform.Origin.IsEqualApprox(faceDirection))
+        if (unitNode.GlobalTransform.Origin.IsEqualApprox(direction))
         {
             return;
         }
 
-        unitNode.LookAt(faceDirection, Vector3.Up, true);
+        unitNode.LookAt(unitNode.GlobalPosition + direction, Vector3.Up, true);
     }
 
     private void OnNavigationAgentVelocityComputed(Vector3 safeVelocity)

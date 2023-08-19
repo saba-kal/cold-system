@@ -11,9 +11,12 @@ public partial class PlayerController : Node3D
     public override void _Ready()
     {
         _camera = GetViewport().GetCamera3D();
+        var unitNumber = 1;
         foreach (Unit unit in GetChildren())
         {
+            unit.UnitNumber = unitNumber;
             _units.Add(unit);
+            unitNumber++;
         }
     }
 

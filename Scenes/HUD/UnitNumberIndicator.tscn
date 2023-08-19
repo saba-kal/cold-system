@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8xpfmhaaak6r"]
+
+[ext_resource type="Texture2D" uid="uid://dkyt0xko1aoho" path="res://Textures/HUD/position_indicator.png" id="1_5mky1"]
+[ext_resource type="Theme" uid="uid://ddjlogvwci4rn" path="res://UI/Cold System UI Theme.tres" id="1_mxwqo"]
+[ext_resource type="Script" path="res://Scripts/HUD/UnitNumberIndicator.cs" id="1_ta0g5"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wjgc3"]
+viewport_path = NodePath("SubViewport")
+
+[node name="UnitNumberIndicator" type="Node3D" node_paths=PackedStringArray("_unitNumberLabel")]
+script = ExtResource("1_ta0g5")
+_unitNumberLabel = NodePath("SubViewport/TextureRect/Label")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(60, 80)
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport"]
+modulate = Color(0.65098, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5mky1")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="SubViewport/TextureRect"]
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -36.415
+offset_right = 20.0
+offset_bottom = 16.585
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mxwqo")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+texture = SubResource("ViewportTexture_wjgc3")

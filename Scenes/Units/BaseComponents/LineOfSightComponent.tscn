@@ -3,5 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/Units/BaseComponents/LineOfSightComponent.cs" id="1_ksi5g"]
 
 [node name="LineOfSightComponent" type="Node3D" node_paths=PackedStringArray("_startPositions")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.54914, 0)
 script = ExtResource("1_ksi5g")
 _startPositions = []
+
+[node name="RayCast3D" type="RayCast3D" parent="."]

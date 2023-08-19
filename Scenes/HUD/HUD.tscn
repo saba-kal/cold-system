@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch6t2vvla7u5r"]
+
+[ext_resource type="Script" path="res://Scripts/HUD/UnitInfoManager.cs" id="1_xbe5w"]
+[ext_resource type="PackedScene" uid="uid://bwow07usebckc" path="res://Scenes/HUD/HUDUnitInfo.tscn" id="2_s1kmg"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -130.0
+offset_right = 225.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+script = ExtResource("1_xbe5w")
+_unitInfoScene = ExtResource("2_s1kmg")
+
+[node name="HUDUnitInfo" parent="HBoxContainer" instance=ExtResource("2_s1kmg")]
+layout_mode = 2
+
+[node name="HUDUnitInfo2" parent="HBoxContainer" instance=ExtResource("2_s1kmg")]
+layout_mode = 2
+
+[node name="HUDUnitInfo3" parent="HBoxContainer" instance=ExtResource("2_s1kmg")]
+layout_mode = 2
+
+[node name="HUDUnitInfo4" parent="HBoxContainer" instance=ExtResource("2_s1kmg")]
+layout_mode = 2
+
+[node name="HUDUnitInfo5" parent="HBoxContainer" instance=ExtResource("2_s1kmg")]
+layout_mode = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtuqgvatfcbk2"]
+[gd_scene load_steps=10 format=3 uid="uid://dtuqgvatfcbk2"]
 
 [ext_resource type="Script" path="res://Scripts/Units/Unit.cs" id="1_13xkx"]
 [ext_resource type="PackedScene" uid="uid://d21glkb30hlci" path="res://Models/Units/StylizedTank.blend" id="1_skvag"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dk3ylp4pvnlcn" path="res://Scenes/Units/Weapons/TankCannon.tscn" id="3_c70gb"]
 [ext_resource type="PackedScene" uid="uid://stj274oo08nb" path="res://Scenes/Units/BaseComponents/TurretAimComponent.tscn" id="4_l5cp7"]
 [ext_resource type="PackedScene" uid="uid://bkbj3lnha4wt0" path="res://Scenes/Units/BaseComponents/LineOfSightComponent.tscn" id="5_ltayd"]
+[ext_resource type="PackedScene" uid="uid://cnokru50x1qq5" path="res://Scenes/Units/BaseComponents/HealthComponent.tscn" id="7_qld24"]
 [ext_resource type="PackedScene" uid="uid://c7kftsmwmfaa" path="res://Scenes/Units/Weapons/WeaponManager.tscn" id="7_s1v6m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_stb2b"]
@@ -37,6 +38,8 @@ _gunNodes = [NodePath("../Visuals/StylizedTank/TankBody/TankBody_001/TankBody_00
 
 [node name="LineOfSightComponent" parent="." node_paths=PackedStringArray("_startPositions") instance=ExtResource("5_ltayd")]
 _startPositions = [NodePath("../Visuals/StylizedTank/TankBody/TankBody_001/TankBody_002/Marker3D")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_qld24")]
 
 [node name="WeaponManager" parent="." instance=ExtResource("7_s1v6m")]
 
