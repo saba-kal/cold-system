@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://rtxyrch40cb4"]
+[gd_scene load_steps=5 format=3 uid="uid://rtxyrch40cb4"]
 
 [ext_resource type="Theme" uid="uid://ddjlogvwci4rn" path="res://UI/Cold System UI Theme.tres" id="1_kmpau"]
 [ext_resource type="Script" path="res://Scenes/Menu/MainMenu.gd" id="2_ioldb"]
 [ext_resource type="Texture2D" uid="uid://bwwc1pmdb5jeg" path="res://UI/CS_LogoPlaceholder.png" id="3_kro6j"]
+[ext_resource type="AudioStream" uid="uid://dpqm0fvde863t" path="res://Audio/Music/Test Music.mp3" id="4_jl1yn"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -11,87 +12,257 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 theme = ExtResource("1_kmpau")
 script = ExtResource("2_ioldb")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="StartMenu" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -380.0
-offset_right = 380.0
-offset_bottom = 271.0
-grow_horizontal = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
-layout_mode = 2
-theme_override_constants/margin_top = 25
-
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("3_kro6j")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -136.5
-offset_top = -75.5
-offset_right = 136.5
-offset_bottom = 75.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2"]
+[node name="MarginContainer3" type="MarginContainer" parent="StartMenu"]
 layout_mode = 2
-theme_override_constants/margin_top = 100
+size_flags_vertical = 3
+theme_override_constants/margin_top = 20
+
+[node name="TextureRect" type="TextureRect" parent="StartMenu/MarginContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_kro6j")
+stretch_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="StartMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 50
 theme_override_constants/margin_bottom = 25
 
-[node name="Play" type="Button" parent="VBoxContainer2/MarginContainer"]
+[node name="Play" type="Button" parent="StartMenu/MarginContainer"]
+custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 text = "Play"
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2"]
+[node name="MarginContainer2" type="MarginContainer" parent="StartMenu"]
 layout_mode = 2
-theme_override_constants/margin_bottom = 25
+size_flags_horizontal = 4
 
-[node name="Settings" type="Button" parent="VBoxContainer2/MarginContainer2"]
+[node name="Settings" type="Button" parent="StartMenu/MarginContainer2"]
+custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 text = "Settings"
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -199.0
-offset_top = -90.0
-offset_right = -87.0
-offset_bottom = -59.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="Corner Button" type="VBoxContainer" parent="StartMenu"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="StartMenu/Corner Button"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer3/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="StartMenu/Corner Button/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = -150
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 40
 
-[node name="Exit" type="Button" parent="VBoxContainer3/HBoxContainer/MarginContainer"]
+[node name="Exit" type="Button" parent="StartMenu/Corner Button/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
 text = "Exit"
 
-[connection signal="pressed" from="VBoxContainer2/MarginContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainer2/MarginContainer2/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="VBoxContainer3/HBoxContainer/MarginContainer/Exit" to="." method="_on_exit_pressed"]
+[node name="SettingsMenu" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Centered Settings" type="VBoxContainer" parent="SettingsMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Seetings Container Video" type="HBoxContainer" parent="SettingsMenu/MarginContainer/Centered Settings"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Video Label" type="MarginContainer" parent="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_right = 60
+
+[node name="Label Video" type="Label" parent="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video/Video Label"]
+layout_mode = 2
+text = "VIDEO"
+
+[node name="Labels" type="VBoxContainer" parent="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video"]
+layout_mode = 2
+
+[node name="Window Mode" type="Label" parent="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video/Labels"]
+layout_mode = 2
+text = "Window Mode"
+
+[node name="Resolution" type="Label" parent="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video/Labels"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="VSync" type="Label" parent="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video/Labels"]
+layout_mode = 2
+text = "VSync"
+
+[node name="Selections" type="VBoxContainer" parent="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video"]
+layout_mode = 2
+
+[node name="Window Dropdown" type="OptionButton" parent="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video/Selections"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+item_count = 2
+selected = 0
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 1
+
+[node name="Resolution Dropdown" type="OptionButton" parent="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video/Selections"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+item_count = 4
+selected = 0
+popup/item_0/text = "1280 x 720"
+popup/item_0/id = 0
+popup/item_1/text = "1920 x 1080"
+popup/item_1/id = 1
+popup/item_2/text = "2560 x 1440"
+popup/item_2/id = 2
+popup/item_3/text = "3840 x 2160"
+popup/item_3/id = 3
+
+[node name="VSync Dropdown" type="OptionButton" parent="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video/Selections"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+item_count = 3
+selected = 0
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Adaptive"
+popup/item_1/id = 1
+popup/item_2/text = "Enabled"
+popup/item_2/id = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu/MarginContainer/Centered Settings"]
+layout_mode = 2
+theme_override_constants/margin_top = 100
+
+[node name="Seetings Container Audio" type="HBoxContainer" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Audio Label" type="MarginContainer" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_right = 75
+
+[node name="Label Audio" type="Label" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Audio Label"]
+layout_mode = 2
+text = "AUDIO"
+
+[node name="Labels" type="VBoxContainer" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Master" type="Label" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Labels"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Master"
+
+[node name="Music" type="Label" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Labels"]
+layout_mode = 2
+text = "Music"
+
+[node name="Sound FX" type="Label" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Labels"]
+layout_mode = 2
+text = "Sound FX"
+
+[node name="Sliders" type="VBoxContainer" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Sliders"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Master" type="HSlider" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Sliders/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.001
+value = 0.8
+
+[node name="MarginContainer2" type="MarginContainer" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Sliders"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Music" type="HSlider" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Sliders/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.001
+value = 0.8
+
+[node name="MarginContainer3" type="MarginContainer" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Sliders"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Sound FX" type="HSlider" parent="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Sliders/MarginContainer3"]
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.001
+value = 0.8
+
+[node name="Corner Back Button" type="HBoxContainer" parent="SettingsMenu"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu/Corner Back Button"]
+layout_mode = 2
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 40
+
+[node name="Back" type="Button" parent="SettingsMenu/Corner Back Button/MarginContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+text = "Back"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jl1yn")
+volume_db = -6.0
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="StartMenu/MarginContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="StartMenu/MarginContainer2/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="StartMenu/Corner Button/HBoxContainer/MarginContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="item_selected" from="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video/Selections/Window Dropdown" to="." method="_on_window_dropdown_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video/Selections/Resolution Dropdown" to="." method="_on_resolution_dropdown_item_selected"]
+[connection signal="item_selected" from="SettingsMenu/MarginContainer/Centered Settings/Seetings Container Video/Selections/VSync Dropdown" to="." method="_on_VSync_dropdown_item_selected"]
+[connection signal="value_changed" from="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Sliders/MarginContainer/Master" to="." method="_on_master_value_changed"]
+[connection signal="value_changed" from="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Sliders/MarginContainer2/Music" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="SettingsMenu/MarginContainer/Centered Settings/MarginContainer/Seetings Container Audio/Sliders/MarginContainer3/Sound FX" to="." method="_on_sound_fx_value_changed"]
+[connection signal="pressed" from="SettingsMenu/Corner Back Button/MarginContainer/Back" to="." method="_on_back_pressed"]
