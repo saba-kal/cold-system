@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8xpfmhaaak6r"]
+[gd_scene load_steps=6 format=3 uid="uid://c8xpfmhaaak6r"]
 
 [ext_resource type="Texture2D" uid="uid://dkyt0xko1aoho" path="res://Textures/HUD/position_indicator.png" id="1_5mky1"]
 [ext_resource type="Theme" uid="uid://ddjlogvwci4rn" path="res://UI/Cold System UI Theme.tres" id="1_mxwqo"]
 [ext_resource type="Script" path="res://Scripts/HUD/UnitNumberIndicator.cs" id="1_ta0g5"]
+[ext_resource type="Script" path="res://Scripts/Misc/SubViewportExportFix.cs" id="2_ve5pe"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_wjgc3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_lie0m"]
 viewport_path = NodePath("SubViewport")
 
 [node name="UnitNumberIndicator" type="Node3D" node_paths=PackedStringArray("_unitNumberLabel")]
@@ -14,6 +15,7 @@ _unitNumberLabel = NodePath("SubViewport/TextureRect/Label")
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
 size = Vector2i(60, 80)
+script = ExtResource("2_ve5pe")
 
 [node name="TextureRect" type="TextureRect" parent="SubViewport"]
 modulate = Color(0.65098, 0, 0, 1)
@@ -53,4 +55,4 @@ vertical_alignment = 1
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 1
-texture = SubResource("ViewportTexture_wjgc3")
+texture = SubResource("ViewportTexture_lie0m")

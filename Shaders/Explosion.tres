@@ -227,7 +227,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-408.268, 245.035)
 modes/cull = 2
 flags/depth_prepass_alpha = true
 nodes/vertex/2/node = SubResource("VisualShaderNodeTexture_ljcom")

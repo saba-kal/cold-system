@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyx1wl4vw6gkr"]
+
+[ext_resource type="PackedScene" uid="uid://10bl4flhywcf" path="res://Scenes/Effects/Explosion.tscn" id="1_v20pq"]
+
+[node name="ParticlePreloader" type="Node3D"]
+
+[node name="Explosion" parent="." instance=ExtResource("1_v20pq")]
