@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsjh6a7bf0v2"]
+
+[ext_resource type="Material" uid="uid://6vhpjk8bb5u0" path="res://Materials/ExplosionParticleMaterial.tres" id="1_odjfl"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_2l8sr"]
+
+[node name="ExplosionParticle" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_2l8sr")
+surface_material_override/0 = ExtResource("1_odjfl")

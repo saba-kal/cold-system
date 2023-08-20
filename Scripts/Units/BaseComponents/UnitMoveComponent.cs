@@ -6,6 +6,8 @@ public partial class UnitMoveComponent : NavigationAgent3D
     [Export] private float _turnSpeed = 10;
     [Export] private AnimationPlayer _animationPlayer;
 
+    private Vector3 _duplicateMoveTarget;
+
     public override void _Ready()
     {
         CallDeferred("ActorSetup");
@@ -17,17 +19,33 @@ public partial class UnitMoveComponent : NavigationAgent3D
         if (IsNavigationFinished())
         {
             _animationPlayer?.Play("Stand");
+            var characterBody = GetParent<CharacterBody3D>();
+            if (GetParent<Unit>().UnitNumber == 1)
+            {
+                //GD.PrintT(characterBody.GlobalPosition, _duplicateMoveTarget);
+            }
+            if (!characterBody.GlobalPosition.IsEqualApprox(_duplicateMoveTarget))
+            {
+                //SetMoveTarget(_duplicateMoveTarget);
+            }
             return;
         }
 
-        var direction = UpdateVelocity((float)delta);
-        FaceTowardsVelocity(direction);
+        Velocity = GetVelocity((float)delta);
+        FaceTowardsVelocity(Velocity.Normalized());
         _animationPlayer?.Play("RunForward");
+
+
+        var characterBody2 = GetParent<CharacterBody3D>();
+        characterBody2.Velocity = Velocity;
+        characterBody2.MoveAndSlide();
     }
 
     public void SetMoveTarget(Vector3 movementTarget)
     {
+        GD.Print(movementTarget);
         TargetPosition = movementTarget;
+        _duplicateMoveTarget = movementTarget;
     }
 
     private async void ActorSetup()
@@ -36,15 +54,14 @@ public partial class UnitMoveComponent : NavigationAgent3D
         SetMoveTarget(GetParent<Node3D>().GlobalPosition);
     }
 
-    private Vector3 UpdateVelocity(float delta)
+    private Vector3 GetVelocity(float delta)
     {
         var currentAgentPosition = GetParent<Node3D>().GlobalPosition;
         var nextPathPosition = GetNextPathPosition();
         var desiredDirection = (nextPathPosition - currentAgentPosition).Normalized();
         var currentDirection = Velocity.Normalized();
         var direction = currentDirection.Lerp(desiredDirection, delta * _turnSpeed).Normalized();
-        Velocity = direction * _moveSpeed * delta;
-        return direction;
+        return direction * _moveSpeed * delta;
     }
 
     private void FaceTowardsVelocity(Vector3 direction)

@@ -7,12 +7,14 @@ public partial class PlayerController : Node3D
     private List<Unit> _units = new List<Unit>();
     private bool _mouseIsPressed = false;
     private Camera3D _camera;
+    private GroupFormationManager _formationManager;
 
     public override void _Ready()
     {
         _camera = GetViewport().GetCamera3D();
+        _formationManager = this.GetChildNode<GroupFormationManager>();
         var unitNumber = 1;
-        foreach (Unit unit in GetChildren())
+        foreach (var unit in this.GetChildren<Unit>())
         {
             unit.UnitNumber = unitNumber;
             _units.Add(unit);
@@ -26,19 +28,22 @@ public partial class PlayerController : Node3D
         {
             if (IsInstanceValid(_units[i]))
             {
-                _units[i].IsSelected = Input.IsActionPressed($"select_unit_{i + 1}");
+                _units[i].IsSelected = Input.IsActionPressed($"select_unit_{i + 1}") || Input.IsActionPressed("select_all_units");
             }
         }
+        _formationManager.SelectedUnitCount = _units.Count(u => u.IsSelected);
 
-        if (Input.IsActionPressed("select_position"))
+        var mousePosition = GetMousePosition();
+        _formationManager.FormationPosition = mousePosition ?? Vector3.Zero;
+        _formationManager.Visible = mousePosition != null;
+        if (mousePosition != null && Input.IsActionJustPressed("select_position"))
         {
-            var mousePosition = GetMousePosition();
-            if (mousePosition != null)
+            var formationPositions = _formationManager.GetFormationPositions();
+            var i = 0;
+            foreach (var unit in GetSelectedUnits())
             {
-                foreach (var unit in GetSelectedUnits())
-                {
-                    unit.SetMoveTarget(mousePosition.Value);
-                }
+                unit.SetMoveTarget(formationPositions[i]);
+                i++;
             }
         }
     }

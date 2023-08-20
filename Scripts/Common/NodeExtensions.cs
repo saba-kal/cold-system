@@ -18,7 +18,8 @@ public static class NodeExtensions
 
     public static T GetChildNode<T>(this Node node)
     {
-        foreach (var childNode in node.GetChildren())
+        var children = node.GetChildren();
+        foreach (var childNode in children)
         {
             if (childNode is T targetNode)
             {
@@ -39,6 +40,19 @@ public static class NodeExtensions
                 children.Add(targetNode);
             }
             children.AddRange(GetAllChildren<T>(childNode));
+        }
+        return children;
+    }
+
+    public static List<T> GetChildren<T>(this Node node)
+    {
+        var children = new List<T>();
+        foreach (var childNode in node.GetChildren())
+        {
+            if (childNode is T targetNode)
+            {
+                children.Add(targetNode);
+            }
         }
         return children;
     }

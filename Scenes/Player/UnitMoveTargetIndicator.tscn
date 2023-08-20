@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://btkew0f51c62g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iugs1"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.027451, 0.756863, 1, 0.462745)
+
+[sub_resource type="SphereMesh" id="SphereMesh_kp5aq"]
+material = SubResource("StandardMaterial3D_iugs1")
+
+[node name="UnitMoveTargetIndicator" type="MeshInstance3D"]
+mesh = SubResource("SphereMesh_kp5aq")

@@ -3,6 +3,5 @@
 [ext_resource type="Script" path="res://Scripts/Units/BaseComponents/UnitMoveComponent.cs" id="1_p4pse"]
 
 [node name="UnitMoveComponent" type="NavigationAgent3D"]
-avoidance_enabled = true
 radius = 1.0
 script = ExtResource("1_p4pse")

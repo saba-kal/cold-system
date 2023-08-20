@@ -1,7 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfopanyk8ew6s"]
+[gd_scene load_steps=4 format=3 uid="uid://cfopanyk8ew6s"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_oiv6k"]
+[ext_resource type="Script" path="res://Scripts/Player/GroupFormationManager.cs" id="2_7mrqi"]
+[ext_resource type="PackedScene" uid="uid://btkew0f51c62g" path="res://Scenes/Player/UnitMoveTargetIndicator.tscn" id="3_ycoow"]
 
 [node name="PlayerController" type="Node3D"]
 script = ExtResource("1_oiv6k")
-_groundCollisionLayer = 1
+
+[node name="GroupFormationManager" type="Node3D" parent="."]
+script = ExtResource("2_7mrqi")
+
+[node name="UnitMoveTargetIndicator1" parent="GroupFormationManager" instance=ExtResource("3_ycoow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12455, 0, 0)
+
+[node name="UnitMoveTargetIndicator2" parent="GroupFormationManager" instance=ExtResource("3_ycoow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18546, 0, 1.64582)
+
+[node name="UnitMoveTargetIndicator3" parent="GroupFormationManager" instance=ExtResource("3_ycoow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24639, 0, 1.64582)
+
+[node name="UnitMoveTargetIndicator4" parent="GroupFormationManager" instance=ExtResource("3_ycoow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90273, 0, -0.213362)
+
+[node name="UnitMoveTargetIndicator5" parent="GroupFormationManager" instance=ExtResource("3_ycoow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.305356, 0, -2.31701)

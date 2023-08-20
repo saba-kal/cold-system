@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dptykbek4nh1s"]
+[gd_scene load_steps=6 format=3 uid="uid://dptykbek4nh1s"]
 
 [ext_resource type="Script" path="res://Scripts/Projectiles/Projectile.cs" id="1_oojkd"]
+[ext_resource type="PackedScene" uid="uid://10bl4flhywcf" path="res://Scenes/Effects/Explosion.tscn" id="2_n7w1q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3gf8t"]
 radius = 0.03
@@ -22,6 +23,7 @@ height = 0.5
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_oojkd")
+_onDeathEffect = ExtResource("2_n7w1q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 0, 0)

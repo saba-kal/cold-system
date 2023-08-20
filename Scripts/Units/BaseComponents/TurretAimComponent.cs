@@ -8,6 +8,7 @@ public partial class TurretAimComponent : Node3D
     public bool TargetIsInSight { get; private set; }
 
     [Export] private float _range = 10f;
+    [Export] private float _turretRotationSpeed = 20f;
     [Export(PropertyHint.Enum, Constants.UNIT_GROUPS)] private string _aimTarget;
     [Export] private Node3D _turretNode;
     [Export] private Array<BaseWeapon> _gunNodes;
@@ -25,6 +26,7 @@ public partial class TurretAimComponent : Node3D
         if (targetUnits.Count == 0)
         {
             TargetIsInSight = false;
+            ResetRotation((float)delta);
             return;
         }
 
@@ -32,11 +34,12 @@ public partial class TurretAimComponent : Node3D
         if (closestTarget == null)
         {
             TargetIsInSight = false;
+            ResetRotation((float)delta);
             return;
         }
 
         AimAtTarget(closestTarget, (float)delta);
-        TargetIsInSight = GunsArePointedAtEnemies();
+        TargetIsInSight = GunsArePointedAtEnemies(closestTarget);
     }
 
     private List<Unit> GetTargetUnits()
@@ -82,7 +85,7 @@ public partial class TurretAimComponent : Node3D
         desiredTransform = desiredTransform.RotatedLocal(Vector3.Up, Mathf.Pi);
 
         var scale = _turretNode.Scale;
-        _turretNode.GlobalTransform = _turretNode.GlobalTransform.InterpolateWith(desiredTransform, delta * 20);
+        _turretNode.GlobalTransform = _turretNode.GlobalTransform.InterpolateWith(desiredTransform, Mathf.Clamp(delta * _turretRotationSpeed, 0, 1));
         _turretNode.Scale = scale; //Setting global transform resets scale. So we need to set it back to it's original value.
 
         // Revert X and Z rotations since we only want to rotate by Y.
@@ -103,11 +106,28 @@ public partial class TurretAimComponent : Node3D
         }
     }
 
-    private bool GunsArePointedAtEnemies()
+    private void ResetRotation(float delta)
+    {
+        _turretNode.Rotation = _turretNode.Rotation.Lerp(Vector3.Zero, Mathf.Clamp(delta * _turretRotationSpeed, 0, 1));
+        foreach (var gunNode in _gunNodes)
+        {
+            if (gunNode.Scale.X > 0)
+            {
+                gunNode.Rotation = Vector3.Zero;
+            }
+            else
+            {
+                // The gun is mirrored to the other side of the mech. So we need to flip it back by rotating 180 degrees.
+                gunNode.Rotation = new Vector3(-Mathf.Pi, 0, 0);
+            }
+        }
+    }
+
+    private bool GunsArePointedAtEnemies(Unit unit)
     {
         foreach (var gun in _gunNodes)
         {
-            if (gun.IsPointedAtTarget())
+            if (gun.IsPointedAtTarget(unit.GetUnitGlobalCenter()))
             {
                 return true;
             }

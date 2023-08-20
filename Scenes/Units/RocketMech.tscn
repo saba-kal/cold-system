@@ -70,6 +70,7 @@ _turretNode = NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2")
 _gunNodes = [NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/MechAutoCannon_Left"), NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/MechAutoCannon_Right")]
 
 [node name="LineOfSightComponent" parent="." node_paths=PackedStringArray("_startPositions") instance=ExtResource("7_crhd1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.77154, 0)
 _startPositions = [NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/MechAutoCannon_Left/Marker3D2"), NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2/MechAutoCannon_Right/Marker3D2")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_mexsy")]

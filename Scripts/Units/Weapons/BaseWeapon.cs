@@ -29,7 +29,7 @@ public abstract partial class BaseWeapon : Node3D
         _soundEffectPlayer?.Play();
     }
 
-    public bool IsPointedAtTarget()
+    public bool IsPointedAtTarget(Vector3 target)
     {
         if (_lineOfSightRay == null)
         {
