@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://o3crrdbihtac"]
+
+[ext_resource type="Script" path="res://Scripts/Units/BaseComponents/UnitModeComponent.cs" id="1_5ut4y"]
+
+[node name="UnitModeComponent" type="Node3D"]
+script = ExtResource("1_5ut4y")

@@ -1,10 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4hrljdnhr3dv"]
+[gd_scene load_steps=3 format=3 uid="uid://c4hrljdnhr3dv"]
 
 [ext_resource type="Script" path="res://Scripts/Camera/RtsCamera.cs" id="1_58e7l"]
+
+[sub_resource type="Curve" id="Curve_fh7sj"]
+min_value = -75.0
+max_value = -15.0
+_data = [Vector2(0, -20.6842), 0.0, -37.1233, 0, 1, Vector2(0.663507, -45.3158), -46.1296, -46.1296, 0, 0, Vector2(1, -65.5263), -21.3221, 0.0, 0, 0]
+point_count = 3
 
 [node name="RTSCamera" type="Node3D"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
 script = ExtResource("1_58e7l")
+_zoomRotationCurve = SubResource("Curve_fh7sj")
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 15)

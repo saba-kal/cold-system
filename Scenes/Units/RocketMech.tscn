@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjppnsbvyd3mf"]
+[gd_scene load_steps=12 format=3 uid="uid://cjppnsbvyd3mf"]
 
 [ext_resource type="Script" path="res://Scripts/Units/Unit.cs" id="1_klk5r"]
 [ext_resource type="PackedScene" uid="uid://f55rjcs431ol" path="res://Models/Units/Mech.glb" id="1_tywy2"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bkbj3lnha4wt0" path="res://Scenes/Units/BaseComponents/LineOfSightComponent.tscn" id="7_crhd1"]
 [ext_resource type="PackedScene" uid="uid://cnokru50x1qq5" path="res://Scenes/Units/BaseComponents/HealthComponent.tscn" id="8_mexsy"]
 [ext_resource type="PackedScene" uid="uid://c7kftsmwmfaa" path="res://Scenes/Units/Weapons/WeaponManager.tscn" id="8_mosnh"]
+[ext_resource type="PackedScene" uid="uid://o3crrdbihtac" path="res://Scenes/Units/BaseComponents/UnitModeComponent.tscn" id="9_3vuvx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xgm33"]
 radius = 0.8
@@ -75,6 +76,9 @@ _startPositions = [NodePath("../Visuals/Mech/Armature/Skeleton3D/Cabin_2/Cabin_2
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_mexsy")]
 _maxHealth = 200.0
+
+[node name="UnitModeComponent" parent="." node_paths=PackedStringArray("_animationPlayer") instance=ExtResource("9_3vuvx")]
+_animationPlayer = NodePath("../Visuals/Mech/AnimationPlayer")
 
 [node name="WeaponManager" parent="." instance=ExtResource("8_mosnh")]
 

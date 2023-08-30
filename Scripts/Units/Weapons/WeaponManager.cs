@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public partial class WeaponManager : Node3D
 {
+    public bool EnableWeapons { get; set; } = true;
+
     private List<BaseWeapon> _weapons;
     private TurretAimComponent _turretAimComponent;
 
@@ -17,6 +19,12 @@ public partial class WeaponManager : Node3D
 
     public override void _Process(double delta)
     {
+        if (!EnableWeapons)
+        {
+            _previousEnabled = false;
+            return;
+        }
+
         var weaponsEnabled = _turretAimComponent?.TargetIsInSight ?? false;
         if (weaponsEnabled == true && _previousEnabled == false)
         {

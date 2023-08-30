@@ -7,6 +7,8 @@ public partial class HUDUnitInfo : Control
 
     [Export] private ProgressBar _healthBar;
     [Export] private Label _unitNumberLabel;
+    [Export] private Control _attackModeIcon;
+    [Export] private Control _moveModeIcon;
 
     public override void _Ready()
     {
@@ -19,10 +21,23 @@ public partial class HUDUnitInfo : Control
         _healthBar.Value = Unit.GetCurrentHealth();
         _unitNumberLabel.Text = Unit.UnitNumber.ToString();
         Unit.DamageTaken += OnDamageTaken;
+        Unit.ModeChanged += OnModeChanged;
+        UpdateModeIcons();
     }
 
     private void OnDamageTaken(Unit _)
     {
         _healthBar.Value = Unit.GetCurrentHealth();
+    }
+
+    private void OnModeChanged(Unit _)
+    {
+        UpdateModeIcons();
+    }
+
+    private void UpdateModeIcons()
+    {
+        _attackModeIcon.Visible = Unit.IsInAttackMode();
+        _moveModeIcon.Visible = !Unit.IsInAttackMode();
     }
 }

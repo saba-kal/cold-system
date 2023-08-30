@@ -46,6 +46,14 @@ public partial class PlayerController : Node3D
                 i++;
             }
         }
+
+        if (Input.IsActionJustPressed("toggle_unit_mode"))
+        {
+            foreach (var unit in GetSelectedUnits())
+            {
+                unit.ToggleMode();
+            }
+        }
     }
 
     private Vector3? GetMousePosition()

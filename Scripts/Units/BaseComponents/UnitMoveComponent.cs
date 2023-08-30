@@ -19,15 +19,6 @@ public partial class UnitMoveComponent : NavigationAgent3D
         if (IsNavigationFinished())
         {
             _animationPlayer?.Play("Stand");
-            var characterBody = GetParent<CharacterBody3D>();
-            if (GetParent<Unit>().UnitNumber == 1)
-            {
-                //GD.PrintT(characterBody.GlobalPosition, _duplicateMoveTarget);
-            }
-            if (!characterBody.GlobalPosition.IsEqualApprox(_duplicateMoveTarget))
-            {
-                //SetMoveTarget(_duplicateMoveTarget);
-            }
             return;
         }
 
@@ -43,9 +34,18 @@ public partial class UnitMoveComponent : NavigationAgent3D
 
     public void SetMoveTarget(Vector3 movementTarget)
     {
-        GD.Print(movementTarget);
         TargetPosition = movementTarget;
         _duplicateMoveTarget = movementTarget;
+    }
+
+    public float GetSpeed()
+    {
+        return _moveSpeed;
+    }
+
+    public void SetSpeed(float speed)
+    {
+        _moveSpeed = speed;
     }
 
     private async void ActorSetup()

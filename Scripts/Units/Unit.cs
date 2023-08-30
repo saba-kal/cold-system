@@ -4,10 +4,12 @@ public partial class Unit : CharacterBody3D
 {
     [Signal] public delegate void DeathEventHandler(Unit unit);
     [Signal] public delegate void DamageTakenEventHandler(Unit unit);
+    [Signal] public delegate void ModeChangedEventHandler(Unit unit);
 
     private UnitMoveComponent _moveComponent;
     private SelectableUnitComponent _selectableComponent;
     private HealthComponent _healthComponent;
+    private UnitModeComponent _modeComponent;
     private Marker3D _unitCenter;
 
     public override void _Ready()
@@ -15,9 +17,14 @@ public partial class Unit : CharacterBody3D
         _moveComponent = this.GetChildNode<UnitMoveComponent>();
         _selectableComponent = this.GetChildNode<SelectableUnitComponent>();
         _healthComponent = this.GetChildNode<HealthComponent>();
+        _modeComponent = this.GetChildNode<UnitModeComponent>();
         _unitCenter = GetNodeOrNull<Marker3D>("UnitCenter");
         _healthComponent.HealthLost += OnHealthLost;
         _healthComponent.DamageTaken += OnDamageTaken;
+        if (_modeComponent != null)
+        {
+            _modeComponent.ModeChanged += OnModeChanged;
+        }
     }
 
     public void SetMoveTarget(Vector3 moveTarget)
@@ -43,6 +50,16 @@ public partial class Unit : CharacterBody3D
     public float GetMaxHealth()
     {
         return _healthComponent.GetMaxHealth();
+    }
+
+    public void ToggleMode()
+    {
+        _modeComponent?.ToggleMode();
+    }
+
+    public bool IsInAttackMode()
+    {
+        return _modeComponent?.IsInAttackMode ?? true;
     }
 
     public bool IsSelected
@@ -78,5 +95,10 @@ public partial class Unit : CharacterBody3D
     private void OnDamageTaken()
     {
         EmitSignal(SignalName.DamageTaken, this);
+    }
+
+    private void OnModeChanged()
+    {
+        EmitSignal(SignalName.ModeChanged, this);
     }
 }
