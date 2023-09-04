@@ -1,0 +1,137 @@
+[gd_scene load_steps=19 format=3 uid="uid://ewodyk4yb0ic"]
+
+[ext_resource type="PackedScene" uid="uid://c4hrljdnhr3dv" path="res://Scenes/Camera/RTSCamera.tscn" id="1_gm1c2"]
+[ext_resource type="Texture2D" uid="uid://btk462ryrkb0f" path="res://Textures/Common/kloppenheim_03_puresky_4k.hdr" id="2_43nhb"]
+[ext_resource type="Material" uid="uid://csmq3ihe4iddp" path="res://Materials/Prototyping/GroundColor.tres" id="3_7i2ef"]
+[ext_resource type="Material" uid="uid://cnfvesylrck0p" path="res://Materials/Prototyping/50PercGrey.tres" id="4_sxquw"]
+[ext_resource type="Material" uid="uid://def7y75246inw" path="res://Materials/Prototyping/MirrorBall.tres" id="5_p7vyj"]
+[ext_resource type="ArrayMesh" uid="uid://d2a1l87tpo5yk" path="res://Models/HumanRef185.obj" id="6_nmtrs"]
+[ext_resource type="Material" uid="uid://tavxsxqih3ac" path="res://Materials/Prototyping/UnshadedBlack.tres" id="7_nx0is"]
+[ext_resource type="PackedScene" uid="uid://f55rjcs431ol" path="res://Models/Units/Mech.glb" id="8_tyqib"]
+[ext_resource type="Material" uid="uid://bb0shcvvbkr6l" path="res://Materials/lookdev.tres" id="9_ql182"]
+[ext_resource type="PackedScene" uid="uid://cc14f1ebxqi3i" path="res://Models/Shiptest.glb" id="10_xitgm"]
+[ext_resource type="ArrayMesh" uid="uid://eh5x0r5exbvg" path="res://Models/Withblob.obj" id="11_ekwhk"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_q27ul"]
+panorama = ExtResource("2_43nhb")
+
+[sub_resource type="Sky" id="Sky_vb277"]
+sky_material = SubResource("PanoramaSkyMaterial_q27ul")
+
+[sub_resource type="Environment" id="Environment_o4fi8"]
+background_mode = 2
+sky = SubResource("Sky_vb277")
+ambient_light_source = 3
+ambient_light_color = Color(0.5, 0.5, 0.5, 1)
+ambient_light_sky_contribution = 0.5
+ambient_light_energy = 2.53
+tonemap_mode = 2
+tonemap_exposure = 1.49
+tonemap_white = 5.81
+fog_enabled = true
+fog_light_color = Color(0.176471, 0.25098, 0.243137, 1)
+fog_light_energy = 3.5
+fog_density = 0.0015
+fog_sky_affect = 0.0
+volumetric_fog_density = 0.002
+volumetric_fog_sky_affect = 0.545
+adjustment_enabled = true
+adjustment_saturation = 0.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xrmsu"]
+material = ExtResource("3_7i2ef")
+size = Vector2(500, 500)
+
+[sub_resource type="SphereMesh" id="SphereMesh_mh2hn"]
+material = ExtResource("4_sxquw")
+radius = 1.5
+height = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_r182s"]
+material = ExtResource("5_p7vyj")
+radius = 1.5
+height = 3.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_jyonk"]
+size = Vector3(1, 9, 1)
+
+[node name="Lookdev" type="Node3D"]
+
+[node name="RTSCamera" parent="." instance=ExtResource("1_gm1c2")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_o4fi8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.740805, 0.546176, -0.391024, 0, 0.582123, 0.813101, 0.671721, -0.602349, 0.431239, -250, 50, 0)
+light_energy = 1.58
+shadow_enabled = true
+shadow_blur = 0.85
+directional_shadow_max_distance = 200.0
+sky_mode = 1
+
+[node name="GroundPlane" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_xrmsu")
+
+[node name="Sphere50Grey" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4, 0)
+mesh = SubResource("SphereMesh_mh2hn")
+
+[node name="SphereMirror" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 4, 0)
+mesh = SubResource("SphereMesh_r182s")
+
+[node name="HumanRef185" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 0)
+gi_mode = 0
+mesh = ExtResource("6_nmtrs")
+surface_material_override/0 = ExtResource("7_nx0is")
+
+[node name="Mech" parent="." instance=ExtResource("8_tyqib")]
+transform = Transform3D(2.96699, 0, 0, 0, 2.96699, 0, 0, 0, 2.96699, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Mech/Armature" index="0"]
+bones/2/position = Vector3(0, 1.54, 0)
+bones/3/rotation = Quaternion(1.76759e-08, 0.383474, 0.923552, 2.98135e-09)
+bones/3/scale = Vector3(1, 1, 0.999988)
+bones/4/rotation = Quaternion(-0.495623, -1.31145e-07, -2.90422e-13, 0.868538)
+bones/5/rotation = Quaternion(-1.85366e-08, -0.778471, -0.627681, 1.4724e-07)
+bones/6/rotation = Quaternion(2.3119e-08, 0.307381, 0.951586, 1.98964e-08)
+bones/6/scale = Vector3(1, 1, 0.999986)
+bones/7/rotation = Quaternion(-0.713394, 1.05811e-07, 4.48201e-13, 0.700763)
+bones/8/rotation = Quaternion(-4.04516e-08, 0.601591, 0.798804, 9.0036e-08)
+bones/15/position = Vector3(0.54, 0.27, 0.298148)
+bones/15/rotation = Quaternion(0.850651, 0, 0, 0.525731)
+bones/17/position = Vector3(-0.54, 0.515347, -0.247611)
+bones/17/rotation = Quaternion(0.903292, -8.57737e-17, -5.30111e-17, 0.429026)
+
+[node name="Cabin_2" parent="Mech/Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89821, -0.0265455)
+bone_idx = 10
+
+[node name="Cabin_2" parent="Mech/Armature/Skeleton3D/Cabin_2" index="0"]
+material_override = ExtResource("9_ql182")
+
+[node name="Legs" parent="Mech/Armature/Skeleton3D" index="1"]
+material_override = ExtResource("9_ql182")
+
+[node name="Shiptest" parent="." instance=ExtResource("10_xitgm")]
+transform = Transform3D(3.7216, 0, -3.8365, -1.59566, 4.86076, -1.54787, 3.48893, 2.22307, 3.38443, -55.9092, 15.2306, 0)
+
+[node name="Sphere_002" parent="Shiptest" index="0"]
+transform = Transform3D(0.983718, -0.179025, -0.0157944, 0.179025, 0.968398, 0.173663, -0.0157945, -0.173663, 0.984679, 1.00527, 0.869144, 6.95164)
+surface_material_override/0 = ExtResource("9_ql182")
+
+[node name="Withblob" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.5986, 0, -4.46383, 0, 6.40881, 0, 4.46383, 0, 4.5986, -107.989, 4.58033, 40.577)
+mesh = ExtResource("11_ekwhk")
+surface_material_override/0 = ExtResource("9_ql182")
+
+[node name="9mTall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.48838, 0)
+visible = false
+mesh = SubResource("BoxMesh_jyonk")
+
+[editable path="RTSCamera"]
+[editable path="Mech"]
+[editable path="Shiptest"]
