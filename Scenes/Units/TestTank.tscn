@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dtuqgvatfcbk2"]
 
 [ext_resource type="Script" path="res://Scripts/Units/Unit.cs" id="1_13xkx"]
-[ext_resource type="PackedScene" uid="uid://d21glkb30hlci" path="res://Models/Units/StylizedTank.blend" id="1_skvag"]
+[ext_resource type="PackedScene" uid="uid://biy3umxfehtvr" path="res://Models/Units/StylizedTank.glb" id="2_6grfc"]
 [ext_resource type="PackedScene" uid="uid://bi2shdljkpd3x" path="res://Scenes/Units/BaseComponents/UnitMoveComponent.tscn" id="3_bvr76"]
 [ext_resource type="PackedScene" uid="uid://dk3ylp4pvnlcn" path="res://Scenes/Units/Weapons/TankCannon.tscn" id="3_c70gb"]
 [ext_resource type="PackedScene" uid="uid://stj274oo08nb" path="res://Scenes/Units/BaseComponents/TurretAimComponent.tscn" id="4_l5cp7"]
@@ -23,23 +23,19 @@ shape = SubResource("BoxShape3D_stb2b")
 
 [node name="Visuals" type="Node3D" parent="."]
 
-[node name="StylizedTank" parent="Visuals" instance=ExtResource("1_skvag")]
+[node name="StylizedTank" parent="Visuals" instance=ExtResource("2_6grfc")]
 
-[node name="Marker3D" type="Marker3D" parent="Visuals/StylizedTank/TankBody/TankBody_001/TankBody_002" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0275531, 3.58998)
-
-[node name="TankCannon" parent="Visuals/StylizedTank/TankBody/TankBody_001" index="1" node_paths=PackedStringArray("_externalWeaponModel") instance=ExtResource("3_c70gb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.800319, 1.57421)
-_externalWeaponModel = NodePath("../TankBody_002")
+[node name="TankCannon" parent="Visuals/StylizedTank/TankBody/TankBody_001/TankBody_002" index="0" instance=ExtResource("3_c70gb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.200772)
 
 [node name="UnitMoveComponent" parent="." instance=ExtResource("3_bvr76")]
 
 [node name="TurretAimComponent" parent="." node_paths=PackedStringArray("_turretNode", "_gunNodes") instance=ExtResource("4_l5cp7")]
 _turretNode = NodePath("../Visuals/StylizedTank/TankBody/TankBody_001")
-_gunNodes = [NodePath("../Visuals/StylizedTank/TankBody/TankBody_001/TankCannon")]
+_gunNodes = [NodePath("../Visuals/StylizedTank/TankBody/TankBody_001/TankBody_002/TankCannon")]
 
 [node name="LineOfSightComponent" parent="." node_paths=PackedStringArray("_startPositions") instance=ExtResource("5_ltayd")]
-_startPositions = [NodePath("../Visuals/StylizedTank/TankBody/TankBody_001/TankBody_002/Marker3D")]
+_startPositions = [null]
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_qld24")]
 

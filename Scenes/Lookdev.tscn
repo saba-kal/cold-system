@@ -106,7 +106,7 @@ bones/17/position = Vector3(-0.54, 0.515347, -0.247611)
 bones/17/rotation = Quaternion(0.903292, -8.57737e-17, -5.30111e-17, 0.429026)
 
 [node name="Cabin_2" parent="Mech/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89821, -0.0265455)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8982, -0.0265455)
 bone_idx = 10
 
 [node name="Cabin_2" parent="Mech/Armature/Skeleton3D/Cabin_2" index="0"]
